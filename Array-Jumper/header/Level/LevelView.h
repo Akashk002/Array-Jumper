@@ -11,6 +11,7 @@ namespace Level
 		sf::RenderWindow* game_window;
 		LevelController* level_controller;
 		ImageView* getBoxOverlayImage(BlockType block_type);
+		BoxDimensions getBoxDimensions();
 		sf::Vector2f calculateBoxPosition(int index);
 
 		UI::UIElement::ImageView* background_image;

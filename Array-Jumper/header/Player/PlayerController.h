@@ -23,5 +23,8 @@ namespace Player
 
 		PlayerState getPlayerState();
 		void setPlayerState(PlayerState new_player_state);
+		void PlayerController::move(MovementDirection direction);
+		bool PlayerController::isPositionInBound(int targetPosition);
+		void PlayerController::readInput();
 	};
 }
