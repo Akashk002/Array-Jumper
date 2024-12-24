@@ -119,5 +119,10 @@ namespace UI
             delete (quit_button);
             delete (background_image);
         }
+        void MainMenuUIController::playButtonCallback()
+        {
+            ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
+            GameService::setGameState(GameState::GAMEPLAY);
+        }
     }
 }
