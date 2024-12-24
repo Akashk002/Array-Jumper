@@ -10,8 +10,19 @@ namespace Level
 
 		sf::RenderWindow* game_window;
 		LevelController* level_controller;
+		ImageView* getBoxOverlayImage(BlockType block_type);
+		sf::Vector2f calculateBoxPosition(int index);
 
 		UI::UIElement::ImageView* background_image;
+		UI::UIElement::ImageView* box_image;
+		UI::UIElement::ImageView* target_overlay_image;
+		UI::UIElement::ImageView* letter_one_overlay_image;
+		UI::UIElement::ImageView* letter_two_overlay_image;
+		UI::UIElement::ImageView* letter_three_overlay_image;
+		UI::UIElement::ImageView* obstacle_one_overlay_image;
+		UI::UIElement::ImageView* obstacle_two_overlay_image;
+		
+
 		const float background_alpha = 110.f;
 
 		void createImages();
@@ -19,6 +30,12 @@ namespace Level
 		void updateImages();
 		void drawLevel();
 		void deleteImages();
+		void calculateBoxDimensions();
+		void calculateBoxSpacing();
+		void calculateBoxWidthHeight();
+		void drawBox(sf::Vector2f position);
+		void LevelView::drawBoxValue(sf::Vector2f position, BlockType box_value);
+
 
 	public:
 		LevelView(LevelController* controller);
