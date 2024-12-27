@@ -1,6 +1,12 @@
 #include "../../header/Global/ServiceLocator.h"
 #include "../../header/Main/GameService.h"
 #include "../../header/Event/EventService.h"
+#include "../../header/Level/LevelService.h"
+#include "../../header/Player/PlayerService.h"
+
+using namespace Player;
+using namespace Level;
+using namespace Gameplay;
 
 namespace Global
 {
@@ -16,6 +22,9 @@ namespace Global
 		event_service = nullptr;
 		sound_service = nullptr;
 		ui_service = nullptr;
+		level_service = nullptr;
+		player_service = nullptr;
+		gameplay_service = nullptr;
 
 		createServices();
 	}
@@ -28,6 +37,9 @@ namespace Global
 		event_service = new EventService();
 		sound_service = new SoundService();
 		ui_service = new UIService();
+		level_service = new LevelService();
+		player_service = new PlayerService();
+		gameplay_service = new GameplayService();
 	}
 
 	void ServiceLocator::initialize()
@@ -36,6 +48,9 @@ namespace Global
 		event_service->initialize();
 		sound_service->initialize();
 		ui_service->initialize();
+		level_service->intialize();
+		player_service->initialize();
+		gameplay_service->initialize();
 	}
 
 	void ServiceLocator::update()
@@ -43,10 +58,11 @@ namespace Global
 		graphic_service->update();
 		event_service->update();
 		ui_service->update();
+		gameplay_service->update();
 		if (GameService::getGameState() == GameState::GAMEPLAY)
 		{
 			level_service->update();
-			//player_service->update();
+			player_service->update();
 		}
 	}
 
@@ -54,10 +70,11 @@ namespace Global
 	{
 		graphic_service->render();
 		ui_service->render();
+		gameplay_service->render();
 		if (GameService::getGameState() == GameState::GAMEPLAY)
 		{
 			level_service->render();
-			//player_service->render();
+			player_service->render();
 		}
 	}
 
@@ -67,6 +84,9 @@ namespace Global
 		delete(event_service);
 		delete(sound_service);
 		delete(ui_service);
+		delete(level_service);
+		delete(player_service);
+		delete(gameplay_service);
 	}
 
 	ServiceLocator* ServiceLocator::getInstance()
@@ -82,4 +102,10 @@ namespace Global
 	SoundService* ServiceLocator::getSoundService() { return sound_service; }
 
 	UIService* ServiceLocator::getUIService() { return ui_service; }
+
+	PlayerService* ServiceLocator::getPlayerService() { return player_service; }
+
+	LevelService* ServiceLocator::getLevelService() { return level_service; }
+
+	GameplayService* ServiceLocator::getGameplayService() { return gameplay_service; }
 }

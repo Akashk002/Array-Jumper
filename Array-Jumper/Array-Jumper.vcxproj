@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\GamePlay\GameplayController.cpp" />
+    <ClCompile Include="source\GamePlay\GameplayService.cpp" />
     <ClCompile Include="source\Global\Config.cpp" />
     <ClCompile Include="source\Event\EventService.cpp" />
     <ClCompile Include="main.cpp" />
@@ -160,6 +162,8 @@
     <ClCompile Include="source\UI\UIService.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="header\Gameplay\GameplayController.h" />
+    <ClInclude Include="header\Gameplay\GameplayService.h" />
     <ClInclude Include="header\Global\Config.h" />
     <ClInclude Include="header\Event\EventService.h" />
     <ClInclude Include="header\Level\BlockType.h" />
@@ -168,6 +172,7 @@
     <ClInclude Include="header\Level\LevelModel.h" />
     <ClInclude Include="header\Level\LevelService.h" />
     <ClInclude Include="header\Level\LevelView.h" />
+    <ClInclude Include="header\Player\MovementDirection.h" />
     <ClInclude Include="header\Player\PlayerController.h" />
     <ClInclude Include="header\Player\PlayerModel.h" />
     <ClInclude Include="header\Player\PlayerService.h" />
