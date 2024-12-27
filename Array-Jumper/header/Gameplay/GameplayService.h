@@ -11,6 +11,7 @@ namespace Gameplay
         void initialize(); // To be called when the object is created
         void update();     // To be called on every frame
         void render();     // To be called on every frame
+        void onDeath();
 
         GameplayController* gameplay_controller;
     };

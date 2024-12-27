@@ -74,8 +74,12 @@ namespace UI
         case GameState::CREDITS:
             credits_screen_ui_controller->update();
             break;
+        case GameState::GAMEPLAY:
+            gameplay_ui_controller->update();
+            break;
         }
     }
+
 
     void UIService::render()
     {
@@ -92,6 +96,9 @@ namespace UI
             break;
         case GameState::CREDITS:
             credits_screen_ui_controller->render();
+            break;
+        case GameState::GAMEPLAY:
+            gameplay_ui_controller->render();
             break;
         }
     }
