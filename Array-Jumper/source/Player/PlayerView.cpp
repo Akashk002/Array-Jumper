@@ -1,6 +1,7 @@
 #include "../../header/Player/PlayerView.h"
 #include "../../header/Player/PlayerModel.h"
 #include "../../header/Player/PlayerController.h"
+#include <iostream>
 #include "../../header/Global/Config.h"
 #include "../../header/Global/ServiceLocator.h"
 
@@ -9,24 +10,14 @@ using namespace Global;
 
 namespace Player
 {
-	PlayerView::PlayerView()
-	{
-		game_window = nullptr;
-		player_image = new ImageView();
-	}
-
 	PlayerView::PlayerView(PlayerController* controller)
 	{
 		player_controller = controller;
+		player_image = new ImageView();
 		game_window = nullptr;
 	}
 
 	PlayerView::~PlayerView() {}
-
-	void PlayerView::initialize()
-	{
-		//Yet to Implement
-	}
 
 	void PlayerView::update()
 	{
@@ -42,7 +33,7 @@ namespace Player
 			break;
 		}
 	}
-	void PlayerView::CalculatePlayerDimensions()
+	void PlayerView::calculatePlayerDimensions()
 	{
 		current_box_dimensions = ServiceLocator::getInstance()->getLevelService()->getBoxDimensions();
 		player_height = current_box_dimensions.box_height;
@@ -65,6 +56,7 @@ namespace Player
 		game_window = ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
 		loadPlayer();
 	}
+
 	sf::Vector2f PlayerView::calulcatePlayerPosition()
 	{
 		float xPosition = current_box_dimensions.box_spacing + static_cast<float>(player_controller->getCurrentPosition()) * (current_box_dimensions.box_width + current_box_dimensions.box_spacing);

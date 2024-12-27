@@ -15,8 +15,15 @@ namespace Player
 		int current_position;
 
 	public:
+		PlayerModel();
+		~PlayerModel();
+
+		void initialize();
+		void update();
+		void render();
 		PlayerState getPlayerState();
 		void setPlayerState(PlayerState new_player_state);
+		void resetPlayer();
 
 		int getCurrentPosition();
 		void setCurrentPosition(int new_position);

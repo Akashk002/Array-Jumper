@@ -4,6 +4,9 @@
 #include "../../header/Player/MovementDirection.h"
 #include "../../header/Global/ServiceLocator.h"
 
+using namespace Global;
+using namespace Sound;
+
 namespace Player
 {
 	PlayerController::PlayerController()
@@ -47,24 +50,7 @@ namespace Player
 		delete(player_model);
 		delete(player_view);
 	}
-	void PlayerController::move(MovementDirection direction)
-	{
-		int steps, targetPosition;
-		switch (direction)
-		{
-		case MovementDirection::FORWARD:
-			steps = 1;
-			break;
-		case MovementDirection::BACKWARD:
-			steps = -1;
-			break;
-		default:
-			steps = 0;
-			break;
-		}
 
-		targetPosition = player_model->getCurrentPosition() + steps;
-	}
 	bool PlayerController::isPositionInBound(int targetPosition)
 	{
 		if (targetPosition >= 0 && targetPosition < LevelData::NUMBER_OF_BOXES)
@@ -97,15 +83,54 @@ namespace Player
 		ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::MOVE);
 	}
 
+	void PlayerController::jump(MovementDirection direction)
+	{
+		int current_position = player_model->getCurrentPosition();
+		Level::BlockType box_value = ServiceLocator::getInstance()->getLevelService()->getCurrentBoxValue(current_position);
+		int steps, targetPosition;
+
+		switch (direction)
+		{
+		case MovementDirection::FORWARD:
+			steps = box_value;
+			break;
+		case MovementDirection::BACKWARD:
+			steps = box_value;
+			break;
+		default:
+			steps = 0;
+			break;
+		}
+
+		targetPosition = current_position + steps;
+
+		if (!isPositionInBound(targetPosition))
+			return;
+
+		player_model->setCurrentPosition(targetPosition);
+		ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::JUMP);
+	}
+
 	void PlayerController::readInput()
 	{
-	if (event_service->pressedRightArrowKey() || event_service->pressedDKey())
-	{
-			move(MovementDirection::FORWARD);
+		if (event_service->pressedRightArrowKey() || event_service->pressedDKey())
+		{
+			if (event_service->heldSpaceKey())
+				jump(MovementDirection::FORWARD);
+			else
+				move(MovementDirection::FORWARD);
+		}
+		if (event_service->pressedLeftArrowKey() || event_service->pressedAKey())
+		{
+			if (event_service->heldSpaceKey())
+				jump(MovementDirection::BACKWARD);
+			else
+				move(MovementDirection::BACKWARD);
+		}
 	}
-	if (event_service->pressedLeftArrowKey() || event_service->pressedAKey())
+
+	void PlayerController::takeDamage()
 	{
-		move(MovementDirection::BACKWARD);
-	}
+		player_model->resetPlayer();
 	}
 }
