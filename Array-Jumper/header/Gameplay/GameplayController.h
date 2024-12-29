@@ -1,4 +1,7 @@
 #pragma once
+#include "../Level/BlockType.h"
+#include "../Player/PlayerController.h"
+
 namespace Gameplay
 {
     class GameplayController {
@@ -14,7 +17,10 @@ namespace Gameplay
         void onPositionChanged(int position);
         bool isEndBlock(BlockType value);
         void processEndBlock();
+        bool isLastLevel();
         void gameOver();
         void onDeath();
+        void gameWon();
+        void loadNextLevel();
     };
 }

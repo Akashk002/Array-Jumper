@@ -54,6 +54,8 @@
     <ClCompile Include="source\Player\PlayerModel.cpp" />
     <ClCompile Include="source\GamePlay\GameplayController.cpp" />
     <ClCompile Include="source\GamePlay\GameplayService.cpp" />
+    <ClCompile Include="source\UI\Gameplay\GameplayUIController.cpp" />
+    <ClCompile Include="source\Level\LevelConfiguration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\Main\GameService.h">
@@ -97,6 +99,8 @@
     <ClInclude Include="header\Player\MovementDirection.h" />
     <ClInclude Include="header\Gameplay\GameplayController.h" />
     <ClInclude Include="header\Gameplay\GameplayService.h" />
+    <ClInclude Include="header\UI\Gameplay\GameplayUIController.h" />
+    <ClInclude Include="header\Level\LevelConfiguration.h" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\sounds\background_music.mp3" />
