@@ -15,13 +15,12 @@ namespace UI
 
 		GameplayUIController::GameplayUIController()
 		{
-			life_count_text = nullptr;
 			createTexts();
 		}
 
 		GameplayUIController::~GameplayUIController()
 		{
-			destroy();
+			//destroy();
 		}
 
 		void GameplayUIController::initialize()
