@@ -55,7 +55,6 @@
     <ClCompile Include="source\GamePlay\GameplayController.cpp" />
     <ClCompile Include="source\GamePlay\GameplayService.cpp" />
     <ClCompile Include="source\UI\Gameplay\GameplayUIController.cpp" />
-    <ClCompile Include="source\Level\LevelConfiguration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\Main\GameService.h">

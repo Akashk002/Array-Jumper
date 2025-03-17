@@ -1,26 +1,25 @@
 #pragma once
-#include "../Level/BlockType.h"
-#include "MovementDirection.h"
-#include "../Event/EventService.h"
+#include "../../header/Event/EventService.h"
 #include "../../header/Level/BlockType.h"
-
-using namespace Event;
-using namespace Level;
+#include "../../header/Level/LevelService.h"
 
 namespace Player
 {
-	class BlockType;
+	enum class PlayerState;
 	class PlayerView;
 	class PlayerModel;
-	enum class PlayerState;
+	enum MovementDirection;
+
 	class PlayerController
 	{
 	private:
-		PlayerModel* player_model;
 		PlayerView* player_view;
+		PlayerModel* player_model;
+		Event::EventService* event_service;
+		Level::LevelService* level_service;
+
 
 		void destroy();
-
 	public:
 		PlayerController();
 		~PlayerController();
@@ -28,23 +27,21 @@ namespace Player
 		void initialize();
 		void update();
 		void render();
-
-		EventService* event_service;
-
-		PlayerState getPlayerState();
-		void setPlayerState(PlayerState new_player_state);
-
 		void move(MovementDirection direction);
-		bool isPositionInBound(int targetPosition);
-
 		void readInput();
-		//BlockType getCurrentBoxValue(int currentPosition);
-		Level::BlockType getCurrentBoxValue(int currentPosition);
 		void jump(MovementDirection direction);
 		void takeDamage();
-		int getCurrentPosition();
-		int getCurrentLives();
 		void reset();
 		void onDeath();
+
+		int GetCurrentLives();
+
+		Level::BlockType getCurrentBoxValue(int currentPosition);
+
+		int getCurrentPosition();
+		bool isPositionInBound(int targetPosition);
+
+		PlayerState GetPlayerState();
+		void SetPlayerState(PlayerState player_state);
 	};
 }

@@ -139,7 +139,6 @@
     <ClCompile Include="source\Event\EventService.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\Global\ServiceLocator.cpp" />
-    <ClCompile Include="source\Level\LevelConfiguration.cpp" />
     <ClCompile Include="source\Level\LevelController.cpp" />
     <ClCompile Include="source\Level\LevelModel.cpp" />
     <ClCompile Include="source\Level\LevelService.cpp" />

@@ -1,18 +1,24 @@
 #pragma once
-#include "GameplayController.h"
+
 namespace Gameplay
 {
+	class GameplayController;
 
-    class GameplayService {
-    public:
-        GameplayService();  // Default constructor
-        ~GameplayService(); // Destructor
+	class GameplayService
+	{
+	private:
+		GameplayController* gameplay_controller;
 
-        void initialize(); // To be called when the object is created
-        void update();     // To be called on every frame
-        void render();     // To be called on every frame
-        void onDeath();
+	public:
+		GameplayService();
+		~GameplayService();
 
-        GameplayController* gameplay_controller;
-    };
+		void initialize();
+		void update();
+		void render();
+
+		void onPositionChanged(int position);
+		void onDeath();
+		void startGame();
+	};
 }

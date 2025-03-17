@@ -1,4 +1,5 @@
 #pragma once
+
 namespace Player
 {
 	enum class PlayerState
@@ -10,30 +11,23 @@ namespace Player
 	class PlayerModel
 	{
 	private:
-
-		PlayerState player_state;
+		const int max_lives = 3;
 		int current_position;
+		int current_lives = max_lives;
+		PlayerState player_state;
 
 	public:
-		const int max_lives = 3;
-		int current_lives;
 
-		PlayerModel();
-		~PlayerModel();
+		int GetCurrentPosition();
+		PlayerState GetPlayerState();
+		void SetCurrentPosition(int new_position);
+		void SetPlayerState(PlayerState new_player_state);
 
 		void initialize();
-		void update();
-		void render();
-		PlayerState getPlayerState();
-		void setPlayerState(PlayerState new_player_state);
-		void resetPlayer();
 
-		int getCurrentPosition();
-		void setCurrentPosition(int new_position);
-		int getCurrentLives();
-		void resetPlayer();
-		void decrementLife();
-		void resetPosition();
-
+		int GetCurrentLives();
+		void ResetPlayer();
+		void DecrementLife();
+		void ResetPosition();
 	};
 }

@@ -1,26 +1,28 @@
 #pragma once
-#include "../Level/BlockType.h"
-#include "../Player/PlayerController.h"
+#include "../../header/Level/BlockType.h"
+
 
 namespace Gameplay
 {
-    class GameplayController {
-    public:
-        GameplayController();  // Default constructor
-        ~GameplayController(); // Destructor
+	class GameplayController
+	{
+	private:
+	public:
+		GameplayController();
+		~GameplayController();
 
-        void initialize(); // To be called when the object is created
-        void update();     // To be called on every frame
-        void render();     // To be called on every frame
-        void processObstacle();
-        bool isObstacle(BlockType value);
-        void onPositionChanged(int position);
-        bool isEndBlock(BlockType value);
-        void processEndBlock();
-        bool isLastLevel();
-        void gameOver();
-        void onDeath();
-        void gameWon();
-        void loadNextLevel();
-    };
+		void initialize();
+		void update();
+		void render();
+
+		void processobstacle();
+		bool isObstacle(Level::BlockType value);
+		bool isEndBlock(Level::BlockType value);
+		void onPositionChanged(int position);
+		void processEndBlock();
+		void gameOver();
+		void onDeath();
+		void gameWon();
+		void startGame();
+	};
 }

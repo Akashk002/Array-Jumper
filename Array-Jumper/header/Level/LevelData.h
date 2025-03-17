@@ -1,13 +1,11 @@
 #pragma once
-#include "BlockType.h"
+#include "../../header/Level/BlockType.h"
 
 namespace Level
 {
-
-    struct LevelData
-    {
-        static const int NUMBER_OF_BOXES = 10;
-
-        BlockType level_boxes[NUMBER_OF_BOXES];
-    };
+	struct LevelData
+	{
+		static const int number_of_boxes = 10;
+		BlockType level_boxes[number_of_boxes];
+	};
 }

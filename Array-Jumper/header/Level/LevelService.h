@@ -1,31 +1,31 @@
 #pragma once
-#include "LevelModel.h"
 
 namespace Level
 {
 	class LevelController;
+	struct BoxDimensions;
+	enum BlockType;
 
 	class LevelService
 	{
 	private:
 		LevelController* level_controller;
-		LevelController* loadNextLevel;
 
 		void destroy();
 	public:
 		LevelService();
 		~LevelService();
 
-		void intialize();
+		void initialize();
 		void update();
 		void render();
-		BoxDimensions getBoxDimensions();
-		BlockType getCurrentBoxValue(int currentPosition);
+
+		BlockType getCurrentBoxValueFromController(int currentPosition);
+		BoxDimensions getBoxDimensionsFromController();
 
 		bool isLastLevel();
 		void loadNextLevel();
 		int getCurrentLevelNumber();
-
 		void resetLevels();
 	};
 }

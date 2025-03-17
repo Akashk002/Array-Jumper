@@ -1,94 +1,111 @@
-
 #include "../../header/Gameplay/GameplayController.h"
 #include "../../header/Global/ServiceLocator.h"
-#include "../../header/Level/BlockType.h"
 #include "../../header/Main/GameService.h"
-
-using namespace Global;
-using namespace Level;
-using namespace Sound;
-using namespace Main;
 
 namespace Gameplay
 {
-	void GameplayController::processObstacle()
+	GameplayController::GameplayController()
 	{
-		ServiceLocator::getInstance()->getPlayerService()->takeDamage();
-		ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::DEATH);
+
+	}
+
+	GameplayController::~GameplayController() {}
+
+	void GameplayController::initialize()
+	{
+		startGame();
+	}
+
+	void GameplayController::update()
+	{
+
+	}
+
+	void GameplayController::render()
+	{
+
+	}
+
+	void GameplayController::startGame()
+	{
+		Main::GameService::setGameState(Main::GameState::GAMEPLAY);
+		return Global::ServiceLocator::getInstance()->getLevelService()->resetLevels();
+		return Global::ServiceLocator::getInstance()->getPlayerService()->resetPlayer();
+
+	}
+
+	void GameplayController::processobstacle()
+	{
+		Global::ServiceLocator::getInstance()->getPlayerService()->takeDamage();
+		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::DEATH);
 	}
 
 	bool GameplayController::isObstacle(Level::BlockType value)
 	{
-		if (value == BlockType::OBSTACLE_ONE || value == BlockType::OBSTACLE_TWO)
+		if (value == Level::BlockType::OBSTACLE_ONE || value == Level::BlockType::OBSTACLE_TWO)
+		{
 			return true;
-		return false;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	void GameplayController::onPositionChanged(int position)
 	{
-		BlockType value = ServiceLocator::getInstance()->getLevelService()->getCurrentBoxValue(position);
+		Level::BlockType currentBoxValue = Global::ServiceLocator::getInstance()->getLevelService()->getCurrentBoxValueFromController(position);
 
-		if (isObstacle(value))
-			processObstacle();
+		if (isObstacle(currentBoxValue))
+		{
+			processobstacle();
+		}
+		else if (isEndBlock(currentBoxValue))
+		{
+			processEndBlock();
+		}
 	}
 
 	bool GameplayController::isEndBlock(Level::BlockType value)
 	{
-		if (value == BlockType::TARGET)
+		if (value == Level::BlockType::TARGET)
+		{
 			return true;
-		return false;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	void GameplayController::processEndBlock()
 	{
-		ServiceLocator::getInstance()->getPlayerService()->levelComplete();
-		ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::LEVEL_COMPLETE);
+		Global::ServiceLocator::getInstance()->getPlayerService()->levelComplete();
+		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::LEVEL_COMPLETE);
 
-
-		if (isLastLevel())
+		if (Global::ServiceLocator::getInstance()->getLevelService()->isLastLevel())
 		{
 			gameWon();
 			return;
 		}
 
-		loadNextLevel();
-	}
-
-	bool GameplayController::isLastLevel()
-	{
-		return ServiceLocator::getInstance()->getLevelService()->isLastLevel();
-	}
-
-	void GameplayController::gameWon()
-	{
-		GameService::setGameState(GameState::CREDITS);
-		ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::GAME_WON);
-	}
-
-	void GameplayController::loadNextLevel()
-	{
-		ServiceLocator::getInstance()->getLevelService()->loadNextLevel();
-	}
-
-
-	void GameplayController::onPositionChanged(int position)
-	{
-		BlockType value = ServiceLocator::getInstance()->getLevelService()->getCurrentBoxValue(position);
-
-		if (isObstacle(value))
-			processObstacle();
-		if (isEndBlock(value))
-			processEndBlock();
+		Global::ServiceLocator::getInstance()->getLevelService()->loadNextLevel();
 	}
 
 	void GameplayController::gameOver()
 	{
-		GameService::setGameState(GameState::CREDITS);
-		ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::DEATH);
+		Main::GameService::setGameState(Main::GameState::CREDITS);
+		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::DEATH);
 	}
+
 	void GameplayController::onDeath()
 	{
 		gameOver();
 	}
 
+	void GameplayController::gameWon()
+	{
+		Main::GameService::setGameState(Main::GameState::CREDITS);
+		Global::ServiceLocator::getInstance()->getSoundService()->playSound(Sound::SoundType::LEVEL_COMPLETE);
+	}
 }
