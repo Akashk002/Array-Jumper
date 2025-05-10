@@ -72,6 +72,12 @@ namespace UI
             quit_button->registerCallbackFuntion(std::bind(&MainMenuUIController::quitButtonCallback, this));
         }
 
+        void MainMenuUIController::playButtonCallback()
+        {
+            ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
+            GameService::setGameState(GameState::GAMEPLAY);
+        }
+
         void MainMenuUIController::instructionsButtonCallback()
         {
             ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
@@ -114,11 +120,5 @@ namespace UI
             delete (quit_button);
             delete (background_image);
         }
-        void MainMenuUIController::playButtonCallback()
-        {
-            ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK);
-            GameService::setGameState(GameState::GAMEPLAY);
-        }
-
     }
 }

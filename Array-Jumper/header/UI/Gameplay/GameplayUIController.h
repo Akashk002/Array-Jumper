@@ -1,5 +1,5 @@
 #pragma once
-#include "../UIElement/TextView.h"
+#include "../../header/UI/UIElement/TextView.h"
 
 namespace UI
 {
@@ -8,6 +8,8 @@ namespace UI
 		class GameplayUIController
 		{
 		private:
+			UI::UIElement::TextView* life_count_text;
+			UIElement::TextView* level_number_text;
 
 			float font_size = 55;
 
@@ -15,13 +17,13 @@ namespace UI
 			const float left_offset = 100.f;
 			const float right_offset = 250.f;
 
-			UIElement::TextView* life_count_text;
-
 			void createTexts();
 			void initializeTexts();
 			void initializeLifeCountText();
+			void initializeLevelNumberText();
 
 			void updateLifeCountText();
+			void updateLevelNumberText();
 
 			void destroy();
 
@@ -34,4 +36,5 @@ namespace UI
 			void render();
 		};
 	}
+
 }

@@ -3,6 +3,7 @@
 namespace Player
 {
 	class PlayerController;
+
 	class PlayerService
 	{
 	private:
@@ -14,12 +15,15 @@ namespace Player
 		PlayerService();
 		~PlayerService();
 
+		void takeDamage();
+
 		void initialize();
 		void update();
 		void render();
-		void takeDamage();
-		void levelComplete();
-		int getCurrentLives();
 
+		int GetCurrentLives();
+		void resetPlayer();
+
+		void levelComplete();
 	};
 }

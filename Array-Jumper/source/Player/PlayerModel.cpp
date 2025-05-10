@@ -2,39 +2,45 @@
 
 namespace Player
 {
-	PlayerState PlayerModel::getPlayerState()
-	{
-		return player_state;
-	}
-
-	void PlayerModel::setPlayerState(PlayerState new_player_state)
-	{
-		player_state = new_player_state;
-	}
-
-	int PlayerModel::getCurrentPosition()
+	int PlayerModel::GetCurrentPosition()
 	{
 		return current_position;
 	}
 
-	void PlayerModel::setCurrentPosition(int new_position)
+	void PlayerModel::SetCurrentPosition(int new_position)
 	{
 		current_position = new_position;
 	}
 
-	void PlayerModel::resetPlayer()
+	PlayerState PlayerModel::GetPlayerState()
+	{
+		return player_state;
+	}
+
+	void PlayerModel::SetPlayerState(PlayerState new_player_state)
+	{
+		player_state = new_player_state;
+	}
+
+	int PlayerModel::GetCurrentLives()
+	{
+		return current_lives;
+	}
+
+	void PlayerModel::ResetPlayer()
 	{
 		current_position = 0;
 		player_state = PlayerState::ALIVE;
 		current_lives = max_lives;
 	}
 
-	void PlayerModel::decrementLife() 
-	{ 
+	void PlayerModel::DecrementLife()
+	{
 		current_lives--;
-	}	
-	void PlayerModel::resetPosition()
-	{ 
+	}
+
+	void PlayerModel::ResetPosition()
+	{
 		current_position = 0;
 	}
 }
